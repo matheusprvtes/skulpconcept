@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operación Bikini by Skulp Concept</title>
+    <meta name="description" content="Protocolos estéticos personalizados que combinan técnica manual brasileña y aparatología de vanguardia.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="design-system.css">
+    
+    <!-- Otimização: Preload da Imagem Hero -->
+    <link rel="preload" as="image" href="MIDIAS/skulp_hero_beach.png">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom Styles for Index -->
+    <style>
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: var(--space-4) 0;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo img {
+            height: 45px; /* Tamanho ajustado para manter as proporções na navbar */
+            width: auto;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 180px; /* Aumentado para mais respiro */
+            padding-bottom: 120px; /* Aumentado para mais respiro */
+            overflow: hidden;
+            background-color: var(--color-section-bg);
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.7);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-label { margin-bottom: var(--space-4); }
+        .hero-title { 
+            margin-bottom: var(--space-8);
+            line-height: 1.05;
+        }
+        .hero-subtitle {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-8); /* Mais espaço abaixo do subtítulo */
+            color: var(--color-text-secondary);
+        }
+        .hero-support {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-12); /* Mais espaço acima do CTA */
+            border-left: 2px solid var(--color-gold);
+            padding-left: var(--space-4);
+            text-align: left;
+            display: inline-block;
+            max-width: 600px;
+        }
+
+        /* General Sections */
+        .section {
+            padding: var(--section-padding-y) 0;
+            background-color: var(--color-section-bg);
+        }
+        .section-alt {
+            background-color: var(--color-bg-secondary);
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+            max-width: 800px;
+            margin-inline: auto;
+        }
+        
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            align-items: center;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-4);
+        }
+        @media (min-width: 768px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .grid-4 { grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+        }
+
+        /* Protocol Cards */
+        .protocol-card {
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all var(--transition-base);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .protocol-card:hover {
+            border-color: var(--color-gold);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-gold);
+        }
+        .protocol-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .protocol-content {
+            padding: var(--space-6);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .protocol-title {
+            margin-bottom: var(--space-3);
+            font-size: var(--text-xl);
+        }
+        .protocol-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+            flex-grow: 1;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+        }
+        .feature-list li {
+            position: relative;
+            padding-left: var(--space-6);
+            margin-bottom: var(--space-4);
+        }
+        .feature-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--color-gold);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0 var(--space-4);
+        }
+        @media (min-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--gradient-card);
+            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-6) 0;
+        }
+        .faq-question {
+            font-family: var(--font-heading);
+            font-size: var(--text-xl);
+            color: var(--color-heading);
+            margin-bottom: var(--space-2);
+        }
+
+        /* Carousel */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            position: relative;
+            aspect-ratio: 4/3;
+            box-shadow: var(--shadow-sm);
+        }
+        .carousel-track {
+            display: flex;
+            width: 400%; /* 4 imagens */
+            height: 100%;
+            animation: slide 16s infinite cubic-bezier(0.8, 0, 0.2, 1);
+        }
+        .carousel-img {
+            width: 25%; /* 1/4 do track */
+            height: 100%;
+            object-fit: cover;
+        }
+        @keyframes slide {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Footer */
+        .footer .logo img {
+            height: 60px; /* Um pouco maior no footer */
+            margin: 0 auto;
+        }
+        .footer {
+            padding: var(--space-12) 0;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+            background-color: var(--color-bg-primary);
+        }
+
+        /* Banner Entre-dobras */
+        .banner-img {
+            width: 100%;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Imagem de Cierre */
+        .cierre-img {
+            width: 100%;
+            max-width: 480px; /* Bem maior, para alinhar com as laterais do título */
+            aspect-ratio: 1 / 1; /* Mantém o formato perfeitamente redondo */
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 20%; /* Centraliza o rosto da mulher */
+            box-shadow: var(--shadow-gold-strong);
+            margin: 0 auto var(--space-8) auto;
+            display: block;
+            border: 2px solid var(--color-gold);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .hero-title { font-size: var(--text-5xl); } /* Aumentado no mobile para igualar aos outros títulos (h2) */
+            
+            /* Layout Mobile Hero Exclusivo */
+            .hero {
+                display: block; /* Remove o flexbox do pai no mobile para controlar pelo content */
+                padding-top: 120px; /* Respiro no topo */
+                padding-bottom: 80px; /* Respiro no bottom */
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                min-height: calc(100vh - 200px); /* Garante a altura real para espalhar os elementos */
+            }
+            
+            /* Tag no topo */
+            .hero-label { 
+                background: rgba(198, 169, 112, 0.15);
+                border: 1px solid var(--color-gold);
+                border-radius: var(--radius-full);
+                padding: var(--space-2) var(--space-4);
+                display: inline-block;
+                margin-bottom: auto; /* Empurra título e subtítulo para o centro */
+                width: max-content;
+                margin-inline: auto;
+            }
+            
+            /* CTA e texto de apoio no bottom */
+            .hero-cta { 
+                order: 5; 
+                margin-top: auto; /* Empurra CTA e texto de apoio para baixo */
+                width: 100%;
+            }
+            .hero-support { 
+                order: 10; 
+                margin-top: var(--space-4); 
+                margin-bottom: 0; 
+                text-align: center; 
+            }
+            
+            .banner-img { background-attachment: scroll; height: 300px; } /* Desativa fixed parallax no mobile por performance */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo"><img src="MIDIAS/logo-skulp.png" alt="Skulp Concept Logo"></a>
+            <a href="https://api.whatsapp.com/send?phone=34636538258&text=%C2%A1Hola!%20Visit%C3%A9%20el%20sitio%20web%20y%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" class="btn-primary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-xs);">Reserva Ahora</a>
+        </div>
+    </nav>
+
+    <!-- [SECCIÓN 1] HERO -->
+    <section class="hero">
+        <img src="MIDIAS/skulp_hero_beach.png" alt="Operación Bikini na praia" class="hero-bg">
+        <div class="container hero-content" data-aos="fade-up">
+            <div class="label-gold hero-label">Operación Bikini by Skulp Concept</div>
+            <h1 class="hero-title">Esta primavera, empieza a prepararte para tu mejor verano</h1>
+            <p class="hero-subtitle">Protocolos estéticos personalizados que combinan técnica manual brasileña y aparatología de vanguardia para ayudarte a sentirte más ligera, más definida y segura de ti, con un cuidado real, elegante y sin prisa.</p>
+            
+            <div class="hero-support">
+                <p>No trabajamos con soluciones genéricas.</p>
+                <p>Trabajamos con valoración estética en profundidad, protocolo personalizado y acompañamiento profesional según lo que tu cuerpo y tu piel necesitan de verdad.</p>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send?phone=34636538258&text=%C2%A1Hola!%20Visit%C3%A9%20el%20sitio%20web%20y%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" class="btn-primary hero-cta">Reserva tu valoración estética</a>
+        </div>
+    </section>
+
+    <!-- [SECCIÓN 2] BLOQUE DE OPORTUNIDAD -->
+    <section class="section section-alt">
+        <div class="container grid-2">
+            <div data-aos="fade-right">
+                <h2>El verano no se improvisa. Se prepara ahora.</h2>
+                <div class="divider-gold" style="margin-inline: 0; margin-bottom: var(--space-8);"></div>
+                
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- Imagem da cama como capa -->
+                        <img src="MIDIAS/skulp_cama_1.jpg" alt="Skulp Concept Clinic" class="carousel-img" loading="lazy">
+                        <img src="MIDIAS/skulp_cama_2.jpg" alt="Skulp Concept Clinic" class="carousel-img" loading="lazy">
+                        <img src="MIDIAS/skulp_conversa.jpg" alt="Skulp Concept Clinic" class="carousel-img" loading="lazy">
+                        <img src="MIDIAS/20251215-48.jpg" alt="Skulp Concept Clinic" class="carousel-img" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div data-aos="fade-left">
+                <p style="margin-bottom: var(--space-4);">La primavera es el momento ideal para empezar un plan corporal y facial con criterio, constancia y estrategia.</p>
+                <p style="margin-bottom: var(--space-6);">Operación Bikini by Skulp Concept nace precisamente para eso: ayudarte a llegar al verano europeo de 2026 con una piel más cuidada, un contorno más armonioso y una sensación real de bienestar.</p>
+                
+                <p style="margin-bottom: var(--space-4);">A través de protocolos personalizados, combinamos técnicas manuales brasileñas con tecnología estética avanzada para acompañar procesos como:</p>
+                
+                <ul class="feature-list feature-grid" style="margin-bottom: var(--space-6);">
+                    <li>Sensación de hinchazón o pesadez</li>
+                    <li>Retención de líquidos</li>
+                    <li>Falta de definición corporal</li>
+                    <li>Textura irregular de la piel</li>
+                    <li>Flacidez leve o moderada</li>
+                    <li>Poros visibles y exceso de grasa</li>
+                    <li>Piel apagada o sin luminosidad</li>
+                    <li>Cuidado preventivo facial y corporal</li>
+                </ul>
+                
+                <div class="badge">
+                    Cada caso se valora de forma personalizada. Cada protocolo se adapta al ritmo, la necesidad y el objetivo de cada persona.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [SECCIÓN 3] PROPUESTA DE VALOR -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Técnica brasileña. Tecnología internacional. Cuidado con propósito.</h2>
+                <div class="divider-gold"></div>
+                <p>En Skulp no entendemos la estética como algo rápido, frío o estandarizado. Entendemos la estética como un proceso bien pensado, bien ejecutado y profundamente personalizado.</p>
+                <p style="margin-top: var(--space-4);">Por eso, Operación Bikini reúne lo mejor de dos mundos: Las manos brasileñas y la potencia de tecnologías seleccionadas para trabajar cuerpo, piel y contorno de forma no invasiva.</p>
+                <p style="margin-top: var(--space-4); font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-gold);">El objetivo no es hacer más. Es hacer lo adecuado para ti.</p>
+            </div>
+
+            <div class="grid-4">
+                <div class="card" style="text-align: center; padding: var(--space-6) var(--space-4);" data-aos="fade-up" data-aos-delay="100">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: var(--space-4);">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-3);">Valoración en profundidad</h3>
+                    <p class="text-sm">Antes de recomendar cualquier protocolo, analizamos tu caso, tus prioridades y el estado real de tu piel o tu cuerpo.</p>
+                </div>
+                <div class="card" style="text-align: center; padding: var(--space-6) var(--space-4);" data-aos="fade-up" data-aos-delay="200">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: var(--space-4);">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path>
+                    </svg>
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-3);">Protocolos personalizados</h3>
+                    <p class="text-sm">Nada se aplica en serie. Cada plan se define según tus necesidades, tu ritmo y la evolución de tu respuesta estética.</p>
+                </div>
+                <div class="card" style="text-align: center; padding: var(--space-6) var(--space-4);" data-aos="fade-up" data-aos-delay="300">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: var(--space-4);">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"></path>
+                    </svg>
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-3);">Naturalidad por encima de todo</h3>
+                    <p class="text-sm">Buscamos una imagen cuidada, armoniosa y elegante, sin excesos ni artificios.</p>
+                </div>
+                <div class="card" style="text-align: center; padding: var(--space-6) var(--space-4);" data-aos="fade-up" data-aos-delay="400">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: var(--space-4);">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-3);">Experiencia Skulp</h3>
+                    <p class="text-sm">Atención individual, ambiente íntimo y una forma de cuidar que respeta el tiempo, el detalle y la escucha.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [SECCIÓN 4] LOS PROTOCOLOS -->
+    <section class="section section-alt" id="protocolos">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Protocolos de Operación Bikini en Skulp Concept</h2>
+                <div class="divider-gold"></div>
+                <p>Hemos reunido protocolos corporales y faciales especialmente pensados para esta temporada, combinando técnicas manuales brasileñas y aparatología estética avanzada. Todo se adapta de forma personalizada tras tu valoración.</p>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: var(--space-12);">
+                <!-- Card 1 -->
+                <div class="protocol-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="MIDIAS/skulp_drenagem_linfatica.png" alt="Drenaje Linfático Brasileña" class="protocol-img">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Drenaje Linfático Brasileña</h3>
+                        <p class="protocol-desc">Protocolo manual suave y personalizado que ayuda a estimular el sistema linfático, favorecer la eliminación de líquidos retenidos y aportar sensación de ligereza, bienestar y mejor contorno corporal.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="protocol-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="MIDIAS/skulp_detox_corporal.png" alt="Detox Corporal Brasileño" class="protocol-img" loading="lazy">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Detox Corporal Brasileño</h3>
+                        <p class="protocol-desc">Tratamiento corporal inspirado en la alta demanda de la estética brasileña. Elimina toxinas, estimula la circulación y promueve una sensación de ligereza y bienestar, mejora la textura de la piel la definición corporal de forma personalizada.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="protocol-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="MIDIAS/skulp_glow_facial.png" alt="Skulp Glow Facial" class="protocol-img" loading="lazy">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Skulp Glow</h3>
+                        <p class="protocol-desc">Nuestro Glow Facial, protocolo exclusivo de alta gama que revela la luminosidad esencial de la piel. Diseñado para equilibrar, perfeccionar y sublimar el rostro, aporta hidratación profunda y una textura impecable.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="protocol-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="MIDIAS/skulp_laser_diodo.png" alt="Láser de Diodo" class="protocol-img" loading="lazy">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Láser de Diodo</h3>
+                        <p class="protocol-desc">Indicada para la reducción progresiva del vello. Tecnología de doble acción: eliminación eficaz del vello y mejora de la calidad de la piel, estimulando el colágeno y aumentando la elasticidad.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="protocol-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="MIDIAS/skulp_radiofrequencia.png" alt="Radiofrecuencia" class="protocol-img" loading="lazy">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Radiofrecuencia de Alta Potencia</h3>
+                        <p class="protocol-desc">Tecnología no invasiva utilizada para trabajar la firmeza cutánea, estimular el colágeno y acompañar protocolos orientados a mejorar la elasticidad de la piel y el contorno en zonas concretas.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="protocol-card" data-aos="fade-up" data-aos-delay="600">
+                    <img src="MIDIAS/skulp_peeling_carbono.png" alt="Peeling de Carbono" class="protocol-img" loading="lazy">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Peeling de Carbono</h3>
+                        <p class="protocol-desc">También conocido como Hollywood Peel. Limpia en profundidad, reduce los poros, controla la grasa, unifica el tono y mejora el acné y imperfecciones cutáneas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-3" style="margin-bottom: var(--space-12);">
+                <!-- Card 7 -->
+                 <div class="protocol-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Ciclone</h3>
+                        <p class="protocol-desc">Tecnología corporal que combina radiofrecuencia con vacuoterapia y cavitación Remodela el cuerpo, mejora la firmeza de la piel y actúa en la reducción de la celulitis.</p>
+                    </div>
+                </div>
+                <!-- Card 8 -->
+                 <div class="protocol-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Crio Skulp</h3>
+                        <p class="protocol-desc">Protocolo exclusivo que combina criolipólisis con técnicas personalizadas para eliminar grasa localizada, remodelar el cuerpo y acelerar el metabolismo.</p>
+                    </div>
+                </div>
+                <!-- Card 9 -->
+                 <div class="protocol-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="protocol-content">
+                        <h3 class="protocol-title">Diseño de Cejas & Skulp Lips</h3>
+                        <p class="protocol-desc">Armonización de cejas respetando la estructura natural. Y Skulp Lips para hidratación profunda y renovación celular avanzada de los labios.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;" data-aos="zoom-in">
+                <a href="https://api.whatsapp.com/send?phone=34636538258&text=%C2%A1Hola!%20Visit%C3%A9%20el%20sitio%20web%20y%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" class="btn-primary">Quiero mi valoración estética personalizada</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- [SECCIÓN 5 & 6] BENEFICIOS E DIFERENCIAL -->
+    <section class="section">
+        <div class="container grid-2">
+            <div data-aos="fade-right">
+                <h2>Una propuesta pensada para verte bien y sentirte mejor</h2>
+                <div class="divider-gold" style="margin-inline: 0;"></div>
+                <p style="margin-bottom: var(--space-4);">Operación Bikini no es un protocolo único. Es una estrategia estética personalizada para preparar tu verano con más criterio y mejores decisiones.</p>
+                
+                <ul class="feature-list" style="margin-bottom: var(--space-6);">
+                    <li>Sensación de ligereza y desinflamación</li>
+                    <li>Mejora visual del contorno corporal</li>
+                    <li>Apoyo estético frente a la retención de líquidos</li>
+                    <li>Trabajo localizado en textura, firmeza y calidad de la piel</li>
+                    <li>Piel más luminosa, uniforme y cuidada</li>
+                    <li>Rituales de autocuidado que mejoran tu bienestar</li>
+                </ul>
+                <p style="font-family: var(--font-heading); color: var(--color-gold); font-size: var(--text-lg);">Lo más importante: no se trata solo del verano. Se trata de empezar ahora a cuidarte bien.</p>
+            </div>
+            <div class="card" data-aos="fade-left">
+                <h2>Lo que hace diferente a Skulp</h2>
+                <div class="divider-gold" style="margin-inline: 0;"></div>
+                <p style="margin-bottom: var(--space-6);">Barcelona tiene muchos centros estéticos. Pero no todos trabajan desde la misma filosofía.</p>
+                
+                <div style="margin-bottom: var(--space-4);">
+                    <h4 style="color: var(--color-gold); margin-bottom: var(--space-1);">Sin prisa</h4>
+                    <p class="text-sm">Aquí el tiempo forma parte del protocolo.</p>
+                </div>
+                <div style="margin-bottom: var(--space-4);">
+                    <h4 style="color: var(--color-gold); margin-bottom: var(--space-1);">Con personalización real</h4>
+                    <p class="text-sm">No trabajamos con soluciones copiadas y pegadas.</p>
+                </div>
+                <div style="margin-bottom: var(--space-4);">
+                    <h4 style="color: var(--color-gold); margin-bottom: var(--space-1);">Con técnica brasileña</h4>
+                    <p class="text-sm">Las manos, la sensibilidad y la precisión forman parte del resultado.</p>
+                </div>
+                <div style="margin-bottom: var(--space-4);">
+                    <h4 style="color: var(--color-gold); margin-bottom: var(--space-1);">Con tecnología de apoyo & Criterio</h4>
+                    <p class="text-sm">Seleccionamos aparatología que complemente y naturalidad por encima de cualquier exceso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTRE-DOBRA 1 (Respiro Visual) -->
+    <section class="banner-img" style="background-image: url('MIDIAS/skulp_banner_pernas.png');" data-aos="fade"></section>
+
+    <!-- [SECCIÓN 7 & 8] KENYA MAFRA & PROVA SOCIAL -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>La mirada técnica detrás de cada protocolo</h2>
+                <div class="divider-gold"></div>
+                <p>En Skulp Concept, cada recomendación nace de una valoración estética detallada.</p>
+                <p style="margin-top: var(--space-4);">Kenya Mafra trabaja desde una visión personalizada, donde se tienen en cuenta el biotipo, la calidad de la piel, el estilo de vida, los objetivos de cada cliente y la mejor combinación entre técnica manual y tecnología estética.</p>
+                <p style="margin-top: var(--space-4); font-family: var(--font-script); font-size: var(--text-2xl); color: var(--color-gold);">Porque un buen protocolo no empieza en la máquina. Empieza en la observación, en la experiencia y en saber leer lo que cada cuerpo necesita.</p>
+            </div>
+
+            <div style="margin-top: var(--space-16);">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Cada vez más personas confían en la experiencia Skulp</h2>
+                    <p>La confianza no se improvisa. Se construye con atención, verdad, técnica y seguimiento.</p>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="100">
+                        <p>"Atención personalizada de verdad. Se nota la técnica brasileña en cada detalle."</p>
+                    </div>
+                    <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="200">
+                        <p>"Ambiente íntimo y elegante. Protocolos adaptados a cada caso."</p>
+                    </div>
+                    <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="300">
+                        <p>"Sensación de cuidado desde la primera visita."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTRE-DOBRA 2 (Respiro Visual) -->
+    <section class="banner-img" style="background-image: url('MIDIAS/skulp_banner_costas.png');" data-aos="fade"></section>
+
+    <!-- [SECCIÓN 9] FAQ -->
+    <section class="section">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Información importante sobre nuestros protocolos</h2>
+                <div class="divider-gold"></div>
+            </div>
+
+            <div class="faq-list" data-aos="fade-up">
+                <div class="faq-item">
+                    <div class="faq-question">¿Los resultados son inmediatos?</div>
+                    <p>Depende del protocolo y de cada persona. En muchos casos se perciben sensaciones o cambios iniciales desde las primeras sesiones, pero la evolución estética es progresiva y personalizada.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Todos los protocolos son iguales para todo el mundo?</div>
+                    <p>No. En Skulp cada recomendación parte de una valoración previa. Lo que funciona para una persona no siempre es lo adecuado para otra.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Se pueden combinar técnicas manuales y aparatología?</div>
+                    <p>Sí, y precisamente ese es uno de los diferenciales de Operación Bikini: combinar manos brasileñas, aparatología y criterio técnico dentro de un plan bien estructurado.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Es solo para cuerpo?</div>
+                    <p>No. Operación Bikini también puede incluir protocolos faciales pensados para preparar la piel de cara al verano, mejorar la luminosidad, la textura y el aspecto general del rostro.</p>
+                </div>
+                <div class="faq-item" style="border-bottom: none;">
+                    <div class="faq-question">¿Cómo sé qué protocolo necesito?</div>
+                    <p>A través de una valoración estética personalizada, donde analizamos tu caso y te orientamos con honestidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [SECCIÓN 10] CIERRE / CTA FINAL -->
+    <section class="section section-alt" id="cta">
+        <div class="container section-header" data-aos="zoom-in">
+            <img src="MIDIAS/20251215-153.jpg" alt="Especialista Skulp" class="cierre-img">
+            <h2>Empieza ahora tu Operación Bikini con una valoración estética personalizada</h2>
+            <div class="divider-gold"></div>
+            <p style="margin-bottom: var(--space-4);">Las plazas de agenda para esta temporada son limitadas, porque en Skulp priorizamos la atención individual y el tiempo real dedicado a cada persona.</p>
+            <p style="margin-bottom: var(--space-8);">Si estás pensando en prepararte para el verano con un plan bien orientado, este es el mejor momento para empezar.</p>
+            
+            <a href="https://api.whatsapp.com/send?phone=34636538258&text=%C2%A1Hola!%20Visit%C3%A9%20el%20sitio%20web%20y%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" class="btn-primary" style="font-size: var(--text-lg); padding: var(--space-5) var(--space-12);">Reserva tu valoración estética</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="margin-bottom: var(--space-4);"><img src="MIDIAS/logo-skulp.png" alt="Skulp Concept Logo"></div>
+            <p class="text-sm" style="color: var(--color-text-muted);">Estética avanzada con técnica brasileña, tecnología internacional y cuidado con propósito.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script>
+        window.addEventListener('load', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+        });
+    </script>
+</body>
+</html>
