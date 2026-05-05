@@ -864,6 +864,8 @@
             if (!modal || !form) return;
 
             var WHATSAPP_PHONE = '34636538258';
+            // === Google Sheets — sustituye por la URL del Apps Script Web App tras el despliegue ===
+            var GSHEETS_URL = 'https://script.google.com/macros/s/AKfycbw6LALrS5iOH8O7MpqTBe-X2p4YFBy91tJUGjLQNtdTzfS1D7X4Et4_n6qjuNx2tSuJ/exec';
 
             function openModal() {
                 modal.hidden = false;
@@ -903,6 +905,16 @@
                     return;
                 }
                 var data = new FormData(form);
+
+                // Envía los datos a Google Sheets (silencioso, no bloquea el flujo)
+                if (GSHEETS_URL && GSHEETS_URL !== 'SUA_URL_DO_SCRIPT_AQUI') {
+                    fetch(GSHEETS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: data
+                    }).catch(function() { /* silencioso */ });
+                }
+
                 var lines = [
                     '¡Hola! Visité el sitio web y me gustaría obtener más información.',
                     '',
