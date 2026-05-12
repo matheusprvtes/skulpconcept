@@ -40,32 +40,32 @@
   */
 
   /* Fundos */
-  --color-section-bg:   #0A0A0A;   /* preto — fundo padrão de todas as seções */
-  --color-bg-primary:   #0A0A0A;
-  --color-bg-secondary: #111111;   /* preto suave — seções alternadas ou cards */
-  --color-bg-card:      #161616;
-  --color-bg-surface:   #1C1C1C;
+  --color-section-bg:   #FFFFFF;   /* branco — fundo padrão de todas as seções */
+  --color-bg-primary:   #FFFFFF;
+  --color-bg-secondary: #F5F2EE;   /* branco quente — seções alternadas ou cards */
+  --color-bg-card:      #FFFFFF;
+  --color-bg-surface:   #FFFFFF;
 
   /* Textos */
-  --color-text-body:      #FFFFFF;  /* branco — todo o texto corrido */
-  --color-text-primary:   #FFFFFF;
-  --color-text-secondary: #F5F2EE;  /* branco quente — parágrafos secundários */
-  --color-text-muted:     #9A9A9A;  /* cinza — captions, rodapés, fine print */
+  --color-text-body:      #333333;  /* cinza escuro — todo o texto corrido */
+  --color-text-primary:   #333333;
+  --color-text-secondary: #555555;  /* cinza médio — parágrafos secundários */
+  --color-text-muted:     #777777;  /* cinza claro — captions, rodapés, fine print */
 
   /* Títulos e destaques */
-  --color-heading:        #C6A970;  /* dourado escuro — h1, h2, h3, palavras em destaque */
-  --color-text-accent:    #C6A970;
+  --color-heading:        #A3864E;  /* dourado escuro — h1, h2, h3, palavras em destaque (ajustado para contraste) */
+  --color-text-accent:    #A3864E;
 
   /* Bordas */
-  --color-border:         rgba(198, 169, 112, 0.25);
-  --color-border-strong:  rgba(198, 169, 112, 0.55);
+  --color-border:         rgba(163, 134, 78, 0.25);
+  --color-border-strong:  rgba(163, 134, 78, 0.55);
 
   /* --- GRADIENTES --- */
   --gradient-gold:        linear-gradient(135deg, #C6A970 0%, #DEC694 50%, #A3864E 100%);
   --gradient-gold-h:      linear-gradient(90deg, #A3864E 0%, #C6A970 40%, #DEC694 70%, #C6A970 100%);
-  --gradient-dark:        linear-gradient(180deg, #0A0A0A 0%, #161616 100%);
-  --gradient-hero:        linear-gradient(180deg, rgba(10,10,10,0.0) 0%, rgba(10,10,10,0.7) 60%, #0A0A0A 100%);
-  --gradient-card:        linear-gradient(145deg, #1C1C1C 0%, #111111 100%);
+  --gradient-dark:        linear-gradient(180deg, #FFFFFF 0%, #F5F2EE 100%);
+  --gradient-hero:        linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.7) 60%, #FFFFFF 100%);
+  --gradient-card:        linear-gradient(145deg, #FFFFFF 0%, #F5F2EE 100%);
 
   /* ────────────────────────────────────────────────────────────
      3. TIPOGRAFIA
@@ -82,12 +82,12 @@
   --font-weight-body-default: 300; /* Light como padrão */
 
   /* Escala de tamanhos */
-  --text-xs:    0.75rem;    /* 12px */
-  --text-sm:    0.875rem;   /* 14px */
-  --text-base:  1rem;       /* 16px */
-  --text-lg:    1.125rem;   /* 18px */
-  --text-xl:    1.25rem;    /* 20px */
-  --text-2xl:   1.5rem;     /* 24px */
+  --text-xs:    0.875rem;   /* 14px (era 12) */
+  --text-sm:    1rem;       /* 16px (era 14) */
+  --text-base:  1.125rem;   /* 18px (era 16) */
+  --text-lg:    1.25rem;    /* 20px (era 18) */
+  --text-xl:    1.375rem;   /* 22px (era 20) */
+  --text-2xl:   1.625rem;   /* 26px (era 24) */
   --text-3xl:   1.875rem;   /* 30px */
   --text-4xl:   2.25rem;    /* 36px */
   --text-5xl:   3rem;       /* 48px */
